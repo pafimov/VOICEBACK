@@ -4,7 +4,7 @@ from main.models import Word
 import os
 
 class Command(BaseCommand):
-    help = 'The Zen of Python'
+    help = 'Write python manage.py [PATH TO CSS] [NAME OF FULL VIDEO FROM STATIC]'
 
     def handle(self, *args, **options):
         path = options['file']

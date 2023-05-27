@@ -13,7 +13,7 @@ class get_videos(APIView):
         word = request.POST.get('word', '')
         print(word)
         videos = Word.objects.filter(word=word)
-        content = {'success' : True, 'data' : []}
+        content = {'success' : True, 'data' : [], 'other' : []}
         for video in videos:
             video.check_all()
             obj = {
@@ -21,5 +21,13 @@ class get_videos(APIView):
                 'word' : static(str(video.word_audio)),
             }
             content['data'].append(obj)
+        other = Word.objects.filter(word__icontains=word).values_list("word", flat=True).distinct()
+        if len(other) > 5:
+            other = other[:5]
+        print(other)
+        for suggestion in other:
+            if suggestion == word:
+                continue
+            content['other'].append(suggestion)
         return Response(content)
 

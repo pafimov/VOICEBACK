@@ -4,7 +4,7 @@ from main.models import Word
 import os
 
 class Command(BaseCommand):
-    help = 'Write python manage.py [PATH TO CSS] [NAME OF FULL VIDEO FROM STATIC]'
+    help = 'Write python manage.py [PATH TO CSV] [NAME OF FULL VIDEO FROM STATIC]'
 
     def handle(self, *args, **options):
         path = options['file']
@@ -20,7 +20,7 @@ class Command(BaseCommand):
         next(reader, None)
         for row in reader:
             print(row)
-            if Word.objects.filter(word=row[0]).count()>=5:
+            if Word.objects.filter(word=row[0]).count()>=3:
                 continue
             new_word = Word(word = row[0], full_video=video, word_start = float(row[1]), word_end = float(row[2]),
                             sentence_start=float(row[3]), sentence_end=float(row[4]))

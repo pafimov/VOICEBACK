@@ -4,13 +4,17 @@ from main.models import Word
 import os
 
 class Command(BaseCommand):
-    help = 'Write python manage.py [PATH TO CSV] [NAME OF FULL VIDEO FROM STATIC]'
+    help = 'Write python manage.py [PATH TO CSV] [NAME OF FULL VIDEO FROM STATIC] [ACCENT]'
 
     def handle(self, *args, **options):
         path = options['file']
         video = options['video']
+        accent = options['accent']
         if video == None:
             print("WHICH VIDEO??")
+            return
+        if accent == None:
+            print("WHICH ACCENT??")
             return
         if not os.path.exists(path):
             print("PATH DOES NOT EXIST!!")
@@ -32,3 +36,4 @@ class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument(nargs='?', type=str, dest="file")
         parser.add_argument(nargs='?', type=str, dest="video")
+        parser.add_argument(nargs='?', type=str, dest="accent")

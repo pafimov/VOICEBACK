@@ -11,8 +11,10 @@ def main_page(request):
 class get_videos(APIView):
     def post(self, request):
         word = request.POST.get('word', '')
-        print(word)
-        videos = Word.objects.filter(word=word)
+        accent = request.POST.get('accent', '')
+        print(word, end=' ')
+        print(accent)
+        videos = Word.objects.filter(word=word, accent=accent)
         content = {'success' : True, 'data' : [], 'other' : []}
         for video in videos:
             video.check_all()
@@ -21,7 +23,7 @@ class get_videos(APIView):
                 'word' : static(str(video.word_audio)),
             }
             content['data'].append(obj)
-        other = Word.objects.filter(word__icontains=word).values_list("word", flat=True).distinct()
+        other = Word.objects.filter(word__icontains=word, accent=accent).values_list("word", flat=True).distinct()
         if len(other) > 5:
             other = other[:5]
         print(other)

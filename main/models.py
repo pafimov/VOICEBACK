@@ -12,6 +12,7 @@ class Word(models.Model):
     full_video = models.CharField(max_length=100)
     sentence_video = models.CharField(max_length=100, null=True, default=None)
     word_audio = models.CharField(max_length=100, null=True, default=None)
+    accent = models.CharField(max_length=100, default="British")
 
     def check_sentence_video(self):
         if self.sentence_video != None and finders.find(self.sentence_video) != None:

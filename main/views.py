@@ -15,11 +15,27 @@ class get_videos(APIView):
         print(word, end=' ')
         print(accent)
         videos = Word.objects.filter(word=word, accent=accent)
-        content = {'success' : True, 'data' : [], 'other' : []}
+        content = {'success' : True, 'data' : []}
         for video in videos:
-            video.check_all()
+            video.check_sentence_video()
             obj = {
                 'sentence' : static(str(video.sentence_video)),
+            }
+            content['data'].append(obj)
+        return Response(content)
+    
+
+class get_audios(APIView):
+    def post(self, request):
+        word = request.POST.get('word', '')
+        accent = request.POST.get('accent', '')
+        print(word, end=' ')
+        print(accent)
+        videos = Word.objects.filter(word=word, accent=accent)
+        content = {'success' : True, 'data' : [], 'other' : []}
+        for video in videos:
+            video.check_word_audio()
+            obj = {
                 'word' : static(str(video.word_audio)),
             }
             content['data'].append(obj)

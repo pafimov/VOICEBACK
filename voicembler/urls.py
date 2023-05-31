@@ -16,10 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from main.views import main_page
-from main.views import get_videos 
+from main.views import get_videos, get_audios 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', main_page),
-    path('getvideos/', get_videos.as_view())
+    path('getvideos/', get_videos.as_view()),
+    path('getaudios/', get_audios.as_view()),
 ]

@@ -20,6 +20,7 @@ class get_videos(APIView):
             video.check_sentence_video()
             obj = {
                 'sentence' : static(str(video.sentence_video)),
+                'film_name' : video.film_name
             }
             content['data'].append(obj)
         return Response(content)

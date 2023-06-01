@@ -10,6 +10,7 @@ class Word(models.Model):
     sentence_start = models.FloatField()
     sentence_end = models.FloatField()
     full_video = models.CharField(max_length=100)
+    film_name = models.CharField(max_length=100, default="Неизвестно")
     sentence_video = models.CharField(max_length=100, null=True, default=None)
     word_audio = models.CharField(max_length=100, null=True, default=None)
     accent = models.CharField(max_length=100, default="British")

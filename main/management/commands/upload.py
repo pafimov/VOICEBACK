@@ -10,6 +10,9 @@ class Command(BaseCommand):
         path = options['file']
         video = options['video']
         accent = options['accent']
+        if path == None:
+            print("WHICH PATH??")
+            return
         if video == None:
             print("WHICH VIDEO??")
             return
@@ -27,7 +30,7 @@ class Command(BaseCommand):
             if Word.objects.filter(word=row[0]).count()>=3:
                 continue
             new_word = Word(word = row[0], full_video=video, word_start = float(row[1]), word_end = float(row[2]),
-                            sentence_start=float(row[3]), sentence_end=float(row[4]))
+                            sentence_start=float(row[3]), sentence_end=float(row[4]), accent=accent)
             new_word.save()
 
         file.close()

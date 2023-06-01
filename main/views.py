@@ -14,7 +14,7 @@ class get_videos(APIView):
         accent = request.POST.get('accent', '')
         print(word, end=' ')
         print(accent)
-        videos = Word.objects.filter(word=word, accent=accent)
+        videos = Word.objects.filter(word=word, accent=accent).order_by('pk')
         content = {'success' : True, 'data' : []}
         for video in videos:
             video.check_sentence_video()
@@ -31,7 +31,7 @@ class get_audios(APIView):
         accent = request.POST.get('accent', '')
         print(word, end=' ')
         print(accent)
-        videos = Word.objects.filter(word=word, accent=accent)
+        videos = Word.objects.filter(word=word, accent=accent).order_by('pk')
         content = {'success' : True, 'data' : [], 'other' : []}
         for video in videos:
             video.check_word_audio()

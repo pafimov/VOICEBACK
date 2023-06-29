@@ -1,6 +1,7 @@
 from django.db import models
 from .trimmer import trim, trim_audio
 from django.contrib.staticfiles import finders
+from django.contrib.auth.models import User
 from django.apps import apps
 
 class Word(models.Model):
@@ -38,3 +39,8 @@ class Word(models.Model):
     def check_all(self):
         self.check_sentence_video()
         self.check_word_audio()
+
+
+class Detail(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    role = models.IntegerField(default=0)

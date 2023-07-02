@@ -15,11 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from main.views import main_page
+from main.views import CustomAuthToken, GetUserName, main_page, RegisterView, SendCode, CheckCode
 from main.views import get_videos, get_audios 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('auth/', CustomAuthToken.as_view()),
+    path('register/', RegisterView.as_view()),
+    path('sendcode/', SendCode.as_view()),
+    path('checkcode/', CheckCode.as_view()),
+    path('getusername/', GetUserName.as_view()),
     path('', main_page),
     path('getvideos/', get_videos.as_view()),
     path('getaudios/', get_audios.as_view()),

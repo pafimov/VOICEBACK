@@ -1,7 +1,7 @@
 import smtplib
 import os
 from email.mime.text import MIMEText
-import random
+import random, secrets
 
 class Emailer:
   def send_email(self, message, who_send):
@@ -508,8 +508,22 @@ class Emailer:
           return True
       except:
           return False
-      
-
-  def go_send(self, mail):
+  
+  x = -1
+  def go_send(self):
       self.x = random.randint(100000, 999999)
-      self.send_email(str(self.x), mail)
+      self.send_email(str(self.x), self.email)
+
+  def __init__(self, email) -> None:
+      self.email = email
+  secret = ''
+  def check(self, code):
+      if str(self.x) == str(code) and self.x != -1:
+          self.secret = secrets.token_urlsafe(16)
+          return self.secret
+      else:
+          return False
+  def final_check(self, email, secret):
+      return self.email == email and self.secret == secret and self.secret != ''
+      
+           
